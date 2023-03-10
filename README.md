@@ -1,5 +1,9 @@
 # Image Gallery API
 
+This project is a RESTful API built with Go for managing an image gallery. It allows users to upload images, view a list of all images, view a single image, update image metadata, and delete images. The metadata for each image includes a title, description, and tags, and is stored in a database of your choice. The API follows best practices for RESTful API design, using appropriate HTTP methods and status codes and handling errors gracefully. The code is well-organized, modular, and readable, with clear documentation for the API endpoints. Use this project as a starting point for building your own Go-based RESTful APIs for image management.
+
+## Project
+
 You will build a RESTful API that allows users to manage and view an image gallery. The API will allow users to upload images, view a list of all images, view a single image, update image metadata, and delete images. The metadata for each image will include a title, description, and tags.
 
 ## Requirements
