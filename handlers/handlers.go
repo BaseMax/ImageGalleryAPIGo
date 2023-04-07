@@ -1,33 +1,44 @@
 package handlers
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 
 	"github.com/BaseMax/ImageGalleryAPIGo/utils"
 )
 
-func UploadImgWithMetadata(w http.ResponseWriter, r *http.Request) {
-	utils.Logger(r)
-	fmt.Fprintf(w, "this is UploadImgWithMetadata")
+func UploadImgWithMetadata(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		utils.Logger(r)
+		fmt.Fprintf(w, "this is UploadImgWithMetadata")
+	}
 }
 
-func GetAllImages(w http.ResponseWriter, r *http.Request) {
-	utils.Logger(r)
-	fmt.Fprintf(w, "this is GetAllImages")
+func GetAllImages(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		utils.Logger(r)
+		fmt.Fprintf(w, "this is GetAllImages")
+	}
 }
 
-func GetOneImgWithMetadata(w http.ResponseWriter, r *http.Request) {
-	utils.Logger(r)
-	fmt.Fprintf(w, "this is GetOneImgWithMetadata")
+func GetOneImgWithMetadata(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		utils.Logger(r)
+		fmt.Fprintf(w, "this is GetOneImgWithMetadata")
+	}
 }
 
-func UpdateImgMetadata(w http.ResponseWriter, r *http.Request) {
-	utils.Logger(r)
-	fmt.Fprintf(w, "this is UpdateImgMetadata")
+func UpdateImgMetadata(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		utils.Logger(r)
+		fmt.Fprintf(w, "this is UpdateImgMetadata")
+	}
 }
 
-func DeleteImg(w http.ResponseWriter, r *http.Request) {
-	utils.Logger(r)
-	fmt.Fprintf(w, "this is DeleteImg")
+func DeleteImg(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		utils.Logger(r)
+		fmt.Fprintf(w, "this is DeleteImg")
+	}
 }
