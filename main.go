@@ -14,7 +14,6 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/BaseMax/ImageGalleryAPIGo/handlers"
-	"github.com/BaseMax/ImageGalleryAPIGo/middelware"
 	"github.com/BaseMax/ImageGalleryAPIGo/utils"
 )
 
@@ -73,25 +72,21 @@ func main() {
 
 	var wait time.Duration
 	router := mux.NewRouter().StrictSlash(true)
-	// http request logger.
-	router.Use(middelware.Logger)
 	api := router.PathPrefix("/api/images").Subrouter()
-	{
-		// Upload a new image and its metadata.
-		api.HandleFunc("/", handlers.UploadImgWithMetadata(db)).Methods(http.MethodPost)
+	// Upload a new image and its metadata.
+	api.HandleFunc("/", handlers.UploadImgWithMetadata).Methods(http.MethodPost)
 
-		// Retrieve a list of all images with their metadata.
-		api.HandleFunc("/", handlers.GetAllImages(db)).Methods(http.MethodGet)
+	// Retrieve a list of all images with their metadata.
+	api.HandleFunc("/", handlers.GetAllImages).Methods(http.MethodGet)
 
-		// Retrieve a single image with its metadata.
-		api.HandleFunc("/{id:[1-9]+}", handlers.GetOneImgWithMetadata(db)).Methods(http.MethodGet)
+	// Retrieve a single image with its metadata.
+	api.HandleFunc("/{id:[1-9]+}", handlers.GetOneImgWithMetadata).Methods(http.MethodGet)
 
-		// Update the metadata for a single image.
-		api.HandleFunc("/{id:[1-9]+}", handlers.UpdateImgMetadata(db)).Methods(http.MethodPut)
+	// Update the metadata for a single image.
+	api.HandleFunc("/{id:[1-9]+}", handlers.UpdateImgMetadata).Methods(http.MethodPut)
 
-		// Delete a single image.
-		api.HandleFunc("/{id:[1-9]+}", handlers.DeleteImg(db)).Methods(http.MethodDelete)
-	}
+	// Delete a single image.
+	api.HandleFunc("/{id:[1-9]+}", handlers.DeleteImg).Methods(http.MethodDelete)
 
 	srv := &http.Server{
 		Addr:         "127.0.0.1:8080",

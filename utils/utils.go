@@ -2,8 +2,14 @@ package utils
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 )
+
+func Logger(r *http.Request) {
+	log.Printf("IP: %s | URL: %s | User Agent: %s | Method: %s", r.RemoteAddr, r.URL.Path, r.UserAgent(), r.Method)
+}
 
 func CheckEnvVars(vars []string) (map[string]string, error) {
 	envs := make(map[string]string)
