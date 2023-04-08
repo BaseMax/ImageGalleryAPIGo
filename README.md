@@ -150,7 +150,7 @@ Response Body:
 
 ```json
 {
-  "message": "Image with ID 5 has been deleted"
+  "message": "Image with ID 1 has been deleted"
 }
 ```
 
