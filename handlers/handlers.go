@@ -209,6 +209,11 @@ func UpdateImgMetadata(db *sql.DB) http.HandlerFunc {
 func DeleteImg(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		utils.Logger(r)
+
+		type Response struct {
+			Message string `json:"message"`
+		}
+
 		// Parse the image ID from the request URL
 		vars := mux.Vars(r)
 		imageID := vars["id"]
@@ -238,8 +243,22 @@ func DeleteImg(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Return a success response
+		response := Response{
+			Message: fmt.Sprintf("Image with ID %s has been deleted", imageID),
+		}
+
+		// Convert the response to JSON
+		jsonResponse, err := json.Marshal(response)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		// Set the response content type to JSON
+		w.Header().Set("Content-Type", "application/json")
+
+		// Write the JSON response
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, "Image with ID %s has been deleted", imageID)
+		w.Write(jsonResponse)
 	}
 }
