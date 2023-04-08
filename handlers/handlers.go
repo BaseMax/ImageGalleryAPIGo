@@ -195,8 +195,14 @@ func UpdateImgMetadata(db *sql.DB) http.HandlerFunc {
 		}
 
 		// Return a success response
+		imageJSON, err := json.Marshal(image)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, "Image with ID %s has been updated", id)
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(imageJSON)
 	}
 }
 

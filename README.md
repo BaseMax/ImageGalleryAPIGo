@@ -128,7 +128,14 @@ curl -X PUT -H "Content-Type: application/json" \
 Response Body:
 
 ```json
-Image with ID 1 has been updated
+{
+  "id": 0,
+  "title": "New Title",
+  "description": "New Description",
+  "tags": "new, tags",
+  "file_path": "",
+  "created_at": ""
+}
 ```
 
 - `DELETE /api/images/{id:[1-9]+}`
