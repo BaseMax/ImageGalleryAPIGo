@@ -17,14 +17,6 @@ import (
 	"github.com/BaseMax/ImageGalleryAPIGo/utils"
 )
 
-type Image struct {
-	ID          int    `json:"id"`
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Tags        string `json:"tags"`
-	CreatedAt   string `json:"created_at"`
-}
-
 func main() {
 	// Initialize database
 	if err := godotenv.Load("env.env"); err != nil {
@@ -60,13 +52,14 @@ func main() {
 
 	if _, err = db.Exec(`
 	CREATE TABLE IF NOT EXISTS images (
-		id INT NOT NULL AUTO_INCREMENT,
+		id INT(11) NOT NULL AUTO_INCREMENT,
 		title VARCHAR(255) NOT NULL,
-		description TEXT,
-		tags VARCHAR(255),
+		description TEXT NOT NULL,
+		tags VARCHAR(255) NOT NULL,
+		file_path VARCHAR(255) NOT NULL,
 		created_at DATETIME NOT NULL,
 		PRIMARY KEY (id)
-	);`); err != nil {
+	  );`); err != nil {
 		log.Fatal(err)
 	}
 
