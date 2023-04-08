@@ -196,7 +196,7 @@ func UpdateImgMetadata(db *sql.DB) http.HandlerFunc {
 
 		// Return a success response
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Image metadata updated successfully"))
+		fmt.Fprintf(w, "Image with ID %s has been updated", id)
 	}
 }
 

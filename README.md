@@ -21,6 +21,130 @@ You will build a RESTful API that allows users to manage and view an image galle
 - Write clear and concise documentation for the API endpoints.
 - Use best practices for RESTful API design, including proper HTTP methods and status codes.
 
+## Endpoints
+
+This API have the following endpoints:
+
+- `GET /api/images/`
+
+Returns a JSON array of all images and it's metadata.
+
+```console
+curl -s http://localhost:8080/api/images/ | jq
+```
+
+Response body:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "My Image",
+    "description": "This is my image",
+    "tags": "tag1,tag2",
+    "file_path": "uploads/1680919323489361965.png",
+    "created_at": "2023-04-08 05:32:03"
+  },
+  {
+    "id": 2,
+    "title": "My Image",
+    "description": "This is my image",
+    "tags": "tag1,tag2",
+    "file_path": "uploads/1680919362135848916.png",
+    "created_at": "2023-04-08 05:32:42"
+  },
+  {
+    "id": 3,
+    "title": "My Image",
+    "description": "This is my image",
+    "tags": "tag1,tag2",
+    "file_path": "uploads/1680919369929026576.png",
+    "created_at": "2023-04-08 05:32:49"
+  }
+]
+```
+
+- `GET /api/images/{id:[1-9]+}`
+
+Returns the JSON representation of a single image and it's metadata specified by the id parameter.
+
+```console
+curl -s http://localhost:8080/api/images/1 | jq
+```
+
+Response Body:
+
+```json
+{
+  "id": 1,
+  "title": "My Image",
+  "description": "This is my image",
+  "tags": "tag1,tag2",
+  "file_path": "uploads/1680919323489361965.png",
+  "created_at": "2023-04-08 05:32:03"
+}
+```
+
+- `POST /api/images/`
+
+Adds a new image with it's metadata.
+
+Request command(curl):
+
+```console
+curl -s -X POST -H "Content-Type: multipart/form-data" \
+            -F "image=@/home/max/Pictures/golang/1.png" \
+            -F "title=My Image" \
+            -F "description=This is my image" \
+            -F "tags=tag1,tag2" http://localhost:8080/api/images/ | jq
+```
+
+Response Body:
+
+```json
+{
+  "id": 1,
+  "title": "My Image",
+  "description": "This is my image",
+  "tags": "tag1,tag2",
+  "file_path": "uploads/1680919323489361965.png",
+  "created_at": "2023-04-08 05:32:03"
+}
+```
+
+- `PUT /api/images/{id:[1-9]+}`
+
+Updates an existing image metadata specified by the id parameter.
+
+Request command(curl):
+
+```console
+curl -X PUT -H "Content-Type: application/json" \
+            -d '{"title":"New Title", "description":"New Description", "tags":"new, tags"}' \
+            http://localhost:8080/api/images/1
+
+```
+
+Response Body:
+
+```json
+Image with ID 1 has been updated
+```
+
+- `DELETE /api/images/{id:[1-9]+}`
+
+Deletes an existing image and it's metadata specified by the id parameter.
+
+```console
+curl -X DELETE http://localhost:8080/api/images/1
+```
+
+Response Body:
+
+```json
+Image with ID 1 has been deleted
+```
+
 ## Evaluation
 
 Your solution will be evaluated on the following criteria:
@@ -32,4 +156,4 @@ Your solution will be evaluated on the following criteria:
 - Is the API documentation clear and concise?
 - Are best practices for RESTful API design followed?
 
-Copyright, Max Base 2023
+Copyright, Max Base, MaxianEdison 2023
